@@ -1,0 +1,4 @@
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source inline("flex flex-wrap items-center justify-between gap-2 gap-3 min-w-0 tabular-nums text-balance");

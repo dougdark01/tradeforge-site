@@ -1,0 +1,75 @@
+.tf-cursor-guide {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  width: 23px;
+  height: 23px;
+  border: 1px solid rgb(119 240 214 / 72%);
+  border-radius: 50%;
+  box-shadow: 0 0 11px rgb(119 240 214 / 22%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: scale 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.tf-cursor-guide[hidden] {
+  display: none;
+}
+
+.tf-cursor-guide.is-over-control {
+  scale: 1.65;
+  border-color: rgb(173 255 235 / 85%);
+  box-shadow: 0 0 12px rgb(119 240 214 / 45%);
+}
+
+@media (any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .tf-cursor-guide:not([hidden]) {
+    display: block;
+  }
+
+  [data-magnetic] {
+    translate: var(--tf-magnet-x, 0px) var(--tf-magnet-y, 0px);
+    transition: translate 170ms cubic-bezier(.2, .75, .3, 1),
+      transform 180ms ease, background-color 180ms ease,
+      border-color 180ms ease, box-shadow 180ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal-state="waiting"] {
+    opacity: 0;
+  }
+
+  [data-reveal-state="entering"] {
+    animation: tf-reveal 510ms cubic-bezier(.2, .72, .3, 1) both;
+  }
+
+  @keyframes tf-reveal {
+    from { opacity: 0; translate: 0 16px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+}
+
+@media print {
+  [data-reveal-state] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+:root[data-motion="reduced"] {
+  scroll-behavior: auto;
+}
+
+:root[data-motion="reduced"] .tf-cursor-guide {
+  display: none;
+}
+
+:root[data-motion="reduced"] [data-magnetic] {
+  translate: none;
+}
+
+:root[data-motion="reduced"] [data-reveal-state] {
+  opacity: 1;
+  animation: none;
+}
